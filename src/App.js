@@ -1,27 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoute from './components/common/protectedRoute';
+import routes from './routes';
 import './App.css';
-
-import { Button } from 'antd';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button type="primary">Primary</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ToastContainer />
+      <Switch>
+        {routes.map(route => {
+          const RenderedRoute = route.protected ? ProtectedRoute : Route;
+          return <RenderedRoute key={route.path} {...route} />;
+        })}
+        <Route component={() => <h6>Not found</h6>} />
+      </Switch>
     </div>
   );
 }
