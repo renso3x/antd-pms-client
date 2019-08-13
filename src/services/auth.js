@@ -16,6 +16,10 @@ export const getCurrentUser = () => {
   }
 };
 
+export const removeToken = () => {
+  localStorage.clear();
+};
+
 export const authenticate = payload => {
   const apiUrl = `${process.env.REACT_APP_API_URL}/api/auth`;
 
