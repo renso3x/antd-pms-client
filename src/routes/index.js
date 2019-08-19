@@ -1,4 +1,4 @@
-import { Login, Dashboard } from '../pages';
+import { Login, Dashboard, Property } from '../pages';
 
 const routes = [
   {
@@ -9,6 +9,12 @@ const routes = [
   {
     path: '/',
     component: Dashboard,
+    exact: true,
+    protected: true
+  },
+  {
+    path: '/property',
+    component: Property,
     exact: true,
     protected: true
   }

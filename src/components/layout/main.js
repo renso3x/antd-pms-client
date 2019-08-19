@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
 import * as S from './styles';
 
 import { removeToken } from '../../services/auth';
@@ -25,9 +26,9 @@ class MainLayout extends Component {
   render() {
     const props = this.props;
     return (
-      <S.FullLayout style={{ height: '100vh' }}>
+      <S.FullLayout>
         <Sider
-          width={200}
+          width={256}
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
@@ -35,12 +36,16 @@ class MainLayout extends Component {
           <S.Logo />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['dashboard']}>
             <Menu.Item key="dashboard">
-              <Icon type="dashboard" />
-              <span>Dashboard</span>
+              <Link to="/">
+                <Icon type="dashboard" />
+                <span>Dashboard</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="property">
-              <Icon type="home" />
-              <span>Properties</span>
+              <Link to="/property">
+                <Icon type="home" />
+                <span>Properties</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="feature">
               <Icon type="thunderbolt" />
@@ -69,7 +74,18 @@ class MainLayout extends Component {
               </S.HeaderRight>
             </S.HeaderContent>
           </Header>
-          <S.MainContent>{props.children}</S.MainContent>
+
+          <S.MainSection>
+            <S.InnerBreadCrumb>
+              <Breadcrumb.Item href="">
+                <Icon type="home" />
+              </Breadcrumb.Item>
+              <Breadcrumb.Item href="">
+                <span>Property List</span>
+              </Breadcrumb.Item>
+            </S.InnerBreadCrumb>
+            <S.InnerContent>{props.children}</S.InnerContent>
+          </S.MainSection>
         </Layout>
       </S.FullLayout>
     );
