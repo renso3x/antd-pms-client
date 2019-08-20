@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Modal } from 'antd';
 
+import { upperCaseFirstChar } from '../utils/helper';
+
 class PropertyTypeForm extends React.Component {
   static defaultProps = {
-    title: 'Create Form'
+    title: 'Create'
   };
 
   render() {
-    const { title, form, visible, onSubmit, onCancel } = this.props;
+    const { title, form, visible, onSubmit, onCancel, value } = this.props;
     const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: {
@@ -24,7 +26,7 @@ class PropertyTypeForm extends React.Component {
     return (
       <Modal
         visible={visible}
-        title={title}
+        title={`${upperCaseFirstChar(title)} Form`}
         onOk={onSubmit}
         onCancel={onCancel}
       >
@@ -34,10 +36,10 @@ class PropertyTypeForm extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: 'Please input a name'
+                  message: 'Please input a type name.'
                 }
               ],
-              initialValue: 'test' // send props
+              initialValue: value
             })(<Input />)}
           </Form.Item>
         </Form>

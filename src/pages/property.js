@@ -13,7 +13,6 @@ class Property extends Component {
 
   componentDidMount() {
     this.props.initFetchTypes();
-    console.log(this.props);
   }
 
   componentWillReceiveProps({ types }) {
@@ -23,7 +22,6 @@ class Property extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <MainLayout>
         <PropertyList types={this.state.types} />

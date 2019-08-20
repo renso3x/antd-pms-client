@@ -1,6 +1,18 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+// Add a request interceptor
+axios.interceptors.request.use(
+  function(config) {
+    config.headers.common['x-auth-token'] = localStorage.getItem('token');
+    return config;
+  },
+  function(error) {
+    // Do something with request error
+    return Promise.reject(error);
+  }
+);
+
 axios.interceptors.response.use(
   function(response) {
     if (response.data.status === 500) {

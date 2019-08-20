@@ -5,7 +5,8 @@ import PropertyTypeForm from '../components/propertyTypeForm';
 class PropertyList extends Component {
   state = {
     showForm: false,
-    formTitle: 'Create Type',
+    formTitle: 'create',
+    value: '',
     dataSource: this.props.types,
     tableColumns: [
       {
@@ -40,11 +41,15 @@ class PropertyList extends Component {
   handleDelete = record => console.log(record);
 
   handleEdit = record => {
-    this.setState(() => ({ formTitle: 'Edit Type', showForm: true }));
+    this.setState(() => ({
+      formTitle: 'edit',
+      showForm: true,
+      value: record.name
+    }));
   };
 
   handleShowForm = () => {
-    this.setState({ showForm: true });
+    this.setState({ formTitle: 'create', showForm: true, value: '' });
   };
 
   handleCancel = () => {
@@ -59,8 +64,8 @@ class PropertyList extends Component {
       }
 
       console.log('Received values of form: ', values);
-      form.resetFields();
-      this.setState({ visible: false });
+      // form.resetFields();
+      // this.setState({ visible: false });
     });
   };
 
@@ -87,9 +92,11 @@ class PropertyList extends Component {
           />
         </Row>
         <PropertyTypeForm
+          formType={this.state.formType}
           wrappedComponentRef={this.saveFormRef}
           title={this.state.formTitle}
           visible={this.state.showForm}
+          value={this.state.value}
           onSubmit={this.handleSubmit}
           onCancel={this.handleCancel}
         />
