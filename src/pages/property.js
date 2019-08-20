@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import { MainLayout } from '../components/layout';
 import PropertyList from '../components/propertyList';
 
-import { initFetchTypes } from '../actions/propertTypes';
+import {
+  initFetchTypes,
+  createTypes,
+  deleteTypes,
+  updateTypes
+} from '../actions/propertTypes';
 
 class Property extends Component {
   state = {
@@ -21,10 +26,21 @@ class Property extends Component {
     });
   }
 
+  handleSave = record => this.props.createTypes(record);
+
+  handleUpdate = record => this.props.updateTypes(record);
+
+  handleDelete = record => this.props.deleteTypes(record);
+
   render() {
     return (
       <MainLayout>
-        <PropertyList types={this.state.types} />
+        <PropertyList
+          types={this.state.types}
+          onSave={this.handleSave}
+          onUpdate={this.handleUpdate}
+          onDelete={this.handleDelete}
+        />
       </MainLayout>
     );
   }
@@ -32,13 +48,16 @@ class Property extends Component {
 
 const mapStatetoProps = state => {
   return {
-    types: state.propertyType.types
+    types: state.propertyType
   };
 };
 
 export default connect(
   mapStatetoProps,
   {
-    initFetchTypes
+    initFetchTypes,
+    createTypes,
+    deleteTypes,
+    updateTypes
   }
 )(Property);

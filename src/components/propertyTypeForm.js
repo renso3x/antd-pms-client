@@ -39,7 +39,7 @@ class PropertyTypeForm extends React.Component {
                   message: 'Please input a type name.'
                 }
               ],
-              initialValue: value
+              initialValue: value.name
             })(<Input />)}
           </Form.Item>
         </Form>

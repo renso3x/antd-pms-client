@@ -4,6 +4,7 @@ import PropertyTypeForm from '../components/propertyTypeForm';
 
 class PropertyList extends Component {
   state = {
+    loading: this.props.types.isFetching,
     showForm: false,
     formTitle: 'create',
     value: '',
@@ -35,16 +36,16 @@ class PropertyList extends Component {
   };
 
   componentWillReceiveProps({ types }) {
-    this.setState({ dataSource: types });
+    this.setState({ dataSource: types.types, loading: types.isFetching });
   }
 
-  handleDelete = record => console.log(record);
+  handleDelete = record => this.props.onDelete(record);
 
   handleEdit = record => {
     this.setState(() => ({
       formTitle: 'edit',
       showForm: true,
-      value: record.name
+      value: record
     }));
   };
 
@@ -58,14 +59,25 @@ class PropertyList extends Component {
 
   handleSubmit = () => {
     const { form } = this.formRef.props;
+    const { formTitle, value } = this.state;
     form.validateFields((err, values) => {
       if (err) {
         return;
       }
 
-      console.log('Received values of form: ', values);
-      // form.resetFields();
-      // this.setState({ visible: false });
+      if (formTitle === 'create') {
+        this.props.onSave({ name: values.name });
+      } else {
+        this.props.onUpdate({
+          id: value._id,
+          data: {
+            name: values.name
+          }
+        });
+      }
+
+      form.resetFields();
+      this.setState({ showForm: false });
     });
   };
 
@@ -86,6 +98,8 @@ class PropertyList extends Component {
         </Row>
         <Row>
           <Table
+            rowKey={record => record._id}
+            loading={this.state.loading}
             bordered
             dataSource={this.state.dataSource}
             columns={this.state.tableColumns}
