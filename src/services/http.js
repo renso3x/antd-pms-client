@@ -33,7 +33,7 @@ function setJWT(token) {
 }
 
 export default {
-  setJWT,
+  setJWT: setJWT,
   get: axios.get,
   post: axios.post,
   put: axios.put,

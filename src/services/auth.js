@@ -5,6 +5,7 @@ const tokenKey = 'token';
 
 export const setToken = token => {
   localStorage.setItem(tokenKey, token);
+  httpRequest.setJWT(token);
 };
 
 export const getCurrentUser = () => {

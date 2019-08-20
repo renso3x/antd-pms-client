@@ -1,20 +1,17 @@
-import http from '../services/http';
 import { takeLatest, put } from 'redux-saga/effects';
-import {
-  FETCH_PROPERTY_START,
-  FETCH_PROPERTY_SUCCESS,
-  FETCH_PROPERTY_ERROR
-} from '../reducers/property';
+import { TYPE_FETCH } from '../reducers/propertTypes';
+import { fetchTypesSuccess, fetchTypesError } from '../actions/propertTypes';
+import { fetchPropertyTypesAPI } from '../services/property';
 
 export function* watchfetchProperty() {
-  yield takeLatest(FETCH_PROPERTY_START, fetchProperty);
+  yield takeLatest(TYPE_FETCH, fetchPropertyTypes);
 }
 
-function* fetchProperty() {
+function* fetchPropertyTypes() {
   try {
-    const properties = yield http.get('/properties');
-    yield put({ type: FETCH_PROPERTY_SUCCESS, payload: properties });
+    const types = yield fetchPropertyTypesAPI();
+    yield put(fetchTypesSuccess(types.data.types));
   } catch (e) {
-    yield put({ type: FETCH_PROPERTY_ERROR });
+    fetchTypesError(e);
   }
 }

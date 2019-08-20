@@ -7,7 +7,7 @@ const { Content } = Layout;
 
 export const FullLayout = styled(Layout)`
   && {
-    /* height: 100vh; */
+    height: 100vh;
   }
 `;
 

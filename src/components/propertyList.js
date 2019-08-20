@@ -1,22 +1,17 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Table, Row, Col, Divider, Popconfirm } from 'antd';
+import { Button, Table, Row, Col, Divider, Popconfirm, Icon } from 'antd';
 import PropertyTypeForm from '../components/propertyTypeForm';
 
 class PropertyList extends Component {
   state = {
     showForm: false,
     formTitle: 'Create Type',
-    dataSource: [
-      {
-        id: 0,
-        type: 'standard'
-      }
-    ],
+    dataSource: this.props.types,
     tableColumns: [
       {
         title: 'Type',
-        dataIndex: 'type',
-        key: 'type'
+        dataIndex: 'name',
+        key: 'name'
       },
       {
         title: 'Action',
@@ -37,6 +32,11 @@ class PropertyList extends Component {
       }
     ]
   };
+
+  componentWillReceiveProps({ types }) {
+    this.setState({ dataSource: types });
+  }
+
   handleDelete = record => console.log(record);
 
   handleEdit = record => {
@@ -71,9 +71,12 @@ class PropertyList extends Component {
   render() {
     return (
       <Fragment>
-        <Row type="flex" justify="end">
+        <Row>
           <Col className="mb-16">
-            <Button onClick={this.handleShowForm}>Create</Button>
+            <Button type="primary" onClick={this.handleShowForm}>
+              <Icon type="plus" />
+              Create
+            </Button>
           </Col>
         </Row>
         <Row>

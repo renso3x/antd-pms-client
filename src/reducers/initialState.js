@@ -1,7 +1,12 @@
 export default {
   property: {
-    loading: false,
+    isFetching: false,
     properties: [],
-    error: false
+    error: {}
+  },
+  propertyTypes: {
+    isFetching: false,
+    types: [],
+    error: {}
   }
 };
