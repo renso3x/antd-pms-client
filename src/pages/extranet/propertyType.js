@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { MainLayout } from '../components/layout';
-import PropertyList from '../components/propertyList';
+import { MainLayout } from '../../components/layout';
+import PropertyList from '../../components/extranet/propertyTypes';
 
 import {
   initFetchTypes,
   createTypes,
   deleteTypes,
   updateTypes
-} from '../actions/propertTypes';
+} from '../../actions/propertTypes';
 
-class Property extends Component {
+class PropertyTypePage extends Component {
   state = {
     types: []
   };
@@ -60,4 +60,4 @@ export default connect(
     deleteTypes,
     updateTypes
   }
-)(Property);
+)(PropertyTypePage);

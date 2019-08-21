@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Modal } from 'antd';
 
-import { upperCaseFirstChar } from '../utils/helper';
+import { upperCaseFirstChar } from '../../utils/helper';
 
 class PropertyTypeForm extends React.Component {
   static defaultProps = {

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Table, Row, Col, Divider, Popconfirm, Icon } from 'antd';
-import PropertyTypeForm from '../components/propertyTypeForm';
+import PropertyTypeForm from './propertyTypeForm';
 
-class PropertyList extends Component {
+class PropertyTypes extends Component {
   state = {
     loading: this.props.types.isFetching,
     showForm: false,
@@ -119,4 +119,4 @@ class PropertyList extends Component {
   }
 }
 
-export default PropertyList;
+export default PropertyTypes;

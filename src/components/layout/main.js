@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon, Breadcrumb } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import * as S from './styles';
 
 import { removeToken } from '../../services/auth';
 
 const { Header, Sider } = Layout;
+const { SubMenu } = Menu;
 
 class MainLayout extends Component {
   state = {
@@ -41,23 +42,43 @@ class MainLayout extends Component {
                 <span>Dashboard</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="property">
-              <Link to="/property">
-                <Icon type="home" />
-                <span>Properties</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="feature">
-              <Icon type="thunderbolt" />
-              <span>Features</span>
-            </Menu.Item>
-            <Menu.Item key="types">
-              <Icon type="control" />
-              <span>Types</span>
+            <SubMenu
+              key="sub1"
+              title={
+                <span>
+                  <Icon type="appstore" />
+                  <span>Property Setup</span>
+                </span>
+              }
+            >
+              <Menu.Item key="property">
+                <Link to="/extranet/accomodation">
+                  <Icon type="home" />
+                  <span>Accomodation</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="amenities">
+                <Icon type="thunderbolt" />
+                <span>Room Amenities</span>
+              </Menu.Item>
+              <Menu.Item key="bed">
+                <Icon type="thunderbolt" />
+                <span>Bed Config</span>
+              </Menu.Item>
+              <Menu.Item key="types">
+                <NavLink to="/extranet/property-types">
+                  <Icon type="control" />
+                  <span>Accomodation Types</span>
+                </NavLink>
+              </Menu.Item>
+            </SubMenu>
+            <Menu.Item key="accounts">
+              <Icon type="team" />
+              <span>User Management</span>
             </Menu.Item>
             <Menu.Item key="team">
               <Icon type="team" />
-              <span>Users</span>
+              <span>Manage Roles</span>
             </Menu.Item>
           </Menu>
         </Sider>

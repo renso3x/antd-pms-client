@@ -1,4 +1,9 @@
-import { Login, Dashboard, Property } from '../pages';
+import {
+  Login,
+  Dashboard,
+  ExtranetProperty,
+  ExtranetAccomodation
+} from '../pages';
 
 const routes = [
   {
@@ -13,10 +18,18 @@ const routes = [
     protected: true
   },
   {
-    path: '/property',
-    component: Property,
+    path: '/extranet/property-types',
+    component: ExtranetProperty,
     exact: true,
-    protected: true
+    protected: true,
+    isAdmin: true
+  },
+  {
+    path: '/extranet/accomodation',
+    component: ExtranetAccomodation,
+    exact: true,
+    protected: true,
+    isAdmin: true
   }
 ];
 
