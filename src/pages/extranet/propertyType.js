@@ -5,7 +5,6 @@ import { MainLayout } from '../../components/layout';
 import PropertyList from '../../components/extranet/propertyTypes';
 
 import {
-  initFetchTypes,
   createTypes,
   deleteTypes,
   updateTypes
@@ -13,12 +12,8 @@ import {
 
 class PropertyTypePage extends Component {
   state = {
-    types: []
+    types: this.props.types.types
   };
-
-  componentDidMount() {
-    this.props.initFetchTypes();
-  }
 
   componentWillReceiveProps({ types }) {
     this.setState({
@@ -55,7 +50,6 @@ const mapStatetoProps = state => {
 export default connect(
   mapStatetoProps,
   {
-    initFetchTypes,
     createTypes,
     deleteTypes,
     updateTypes

@@ -1,6 +1,6 @@
-import { takeLatest, put, call, all, takeEvery } from 'redux-saga/effects';
+import { put, call, all, takeEvery, fork } from 'redux-saga/effects';
+
 import {
-  TYPE_INIT,
   TYPE_CREATE_INIT,
   TYPE_CREATE_SUCCESS,
   TYPE_UPDATE_INIT,
@@ -8,7 +8,9 @@ import {
   TYPE_UPDATE_SUCCESS,
   TYPE_DELETE_SUCCESS
 } from '../reducers/propertTypes';
+
 import { fetchTypesSuccess, fetchTypesError } from '../actions/propertTypes';
+
 import {
   fetchPropertyTypesAPI,
   postPropertyTypeAPI,
@@ -18,7 +20,7 @@ import {
 
 export function* watchfetchProperty() {
   yield all([
-    yield takeLatest(TYPE_INIT, fetchPropertyTypes),
+    yield fork(fetchPropertyTypes),
     yield takeEvery(TYPE_CREATE_INIT, createPropertyType),
     yield takeEvery(TYPE_UPDATE_INIT, updatePropertyType),
     yield takeEvery(TYPE_DELETE_INIT, removePropertyType)

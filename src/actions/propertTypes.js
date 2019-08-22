@@ -1,15 +1,10 @@
 import {
-  TYPE_INIT,
   TYPE_SUCCESS_FETCH,
   TYPE_ERROR_FETCH,
   TYPE_CREATE_INIT,
   TYPE_UPDATE_INIT,
   TYPE_DELETE_INIT
 } from '../reducers/propertTypes';
-
-export const initFetchTypes = () => ({
-  type: TYPE_INIT
-});
 
 export const fetchTypesSuccess = data => ({
   type: TYPE_SUCCESS_FETCH,

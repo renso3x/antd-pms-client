@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, Button, Divider, Row, Col, Card } from 'antd';
+import { Table, Button, Divider, Row, Col } from 'antd';
+import { connect } from 'react-redux';
 
 import MainLayout from '../../components/layout/main';
 import AccomodationForm from '../../components/extranet/accomodationSetup';
@@ -52,7 +53,7 @@ class Accomodation extends Component {
         {this.state.showForm ? (
           <Row>
             <Col className="mb-16">
-              <AccomodationForm onCancel={this.toggleForm} />
+              <AccomodationForm {...this.props} onCancel={this.toggleForm} />
             </Col>
           </Row>
         ) : (
@@ -73,4 +74,8 @@ class Accomodation extends Component {
   }
 }
 
-export default Accomodation;
+const mapStateToProps = ({ propertyType }) => {
+  return { types: propertyType.types };
+};
+
+export default connect(mapStateToProps)(Accomodation);
