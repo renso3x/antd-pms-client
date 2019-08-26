@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { MainLayout } from '../../components/layout';
-import PropertyList from '../../components/extranet/propertyTypes';
+import PropertyTypes from '../../components/extranet/propertyTypes';
 
 import {
   createTypes,
@@ -30,7 +30,7 @@ class PropertyTypePage extends Component {
   render() {
     return (
       <MainLayout>
-        <PropertyList
+        <PropertyTypes
           types={this.state.types}
           onSave={this.handleSave}
           onUpdate={this.handleUpdate}

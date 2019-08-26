@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import property from './property';
+import accomodation from './accomodation';
 import propertyType from './propertTypes';
 
 const rootReducer = combineReducers({
-  property: property,
+  accomodation: accomodation,
   propertyType: propertyType
 });
 

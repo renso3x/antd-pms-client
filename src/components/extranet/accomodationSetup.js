@@ -12,8 +12,13 @@ class AccomodationForm extends Component {
     console.log(`selected ${value}`);
   };
 
+  onHandleSubmit = e => {
+    e.preventDefault();
+    this.props.onSave(e);
+  };
+
   render() {
-    const { form, onCancel } = this.props;
+    const { form, onCancel, onSave } = this.props;
     const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: {
@@ -50,7 +55,7 @@ class AccomodationForm extends Component {
     return (
       <>
         <h1>Accomodation Setup</h1>
-        <Form {...formItemLayout}>
+        <Form {...formItemLayout} onSubmit={this.onHandleSubmit}>
           <Form.Item label="Accommodation Name">
             {getFieldDecorator('name', {
               rules: [
@@ -78,8 +83,7 @@ class AccomodationForm extends Component {
               ]
             })(
               <Select placeholder="Please select a country">
-                <Option value="china">China</Option>
-                <Option value="usa">U.S.A</Option>
+                <Option value="ph">Philippines</Option>
               </Select>
             )}
           </Form.Item>
@@ -93,8 +97,7 @@ class AccomodationForm extends Component {
               ]
             })(
               <Select placeholder="Please select a destination">
-                <Option value="china">China</Option>
-                <Option value="usa">U.S.A</Option>
+                <Option value="mnl">Manila</Option>
               </Select>
             )}
           </Form.Item>
@@ -108,8 +111,8 @@ class AccomodationForm extends Component {
               ]
             })(<Input />)}
           </Form.Item>
-          <Form.Item label="Business Email Addresss">
-            {getFieldDecorator('businessEmailAddress', {
+          <Form.Item label="Business Email Address">
+            {getFieldDecorator('businessEmail', {
               rules: [
                 {
                   required: true,
@@ -143,7 +146,7 @@ class AccomodationForm extends Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Accomodation Type">
-            {getFieldDecorator('accomodationType', {
+            {getFieldDecorator('accomodationTypeId', {
               rules: [{ required: true, message: 'Please select a type!' }]
             })(
               <Select

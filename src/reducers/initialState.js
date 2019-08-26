@@ -1,7 +1,7 @@
 export default {
-  property: {
+  accomodation: {
     isFetching: false,
-    properties: [],
+    listings: [],
     error: {}
   },
   propertyTypes: {
