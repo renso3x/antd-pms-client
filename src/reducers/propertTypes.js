@@ -21,7 +21,6 @@ export default function reducer(state = initialState.propertyTypes, action) {
       };
 
     case TYPE_UPDATE_SUCCESS:
-      console.log(action.payload.data);
       return {
         ...state,
         types: state.types.map(type => {

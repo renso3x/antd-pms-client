@@ -14,6 +14,8 @@ class Accomodation extends Component {
     this.state = {
       showForm: false,
       dataSource: this.formatDS(props.accomodation.listings),
+      formTitle: 'create',
+      record: {},
       columns: [
         {
           title: 'Accomdation Name',
@@ -28,14 +30,10 @@ class Accomodation extends Component {
         {
           title: 'Action',
           key: 'action',
-          render: (text, record) =>
+          render: (text, record, index) =>
             this.state.dataSource.length >= 1 ? (
               <span>
-                <Button icon="edit" />
-                <Divider type="vertical" />
-                <Button icon="chrome" type="primary" />
-                <Divider type="vertical" />
-                <Button icon="delete" type="danger" />
+                <Button icon="edit" onClick={() => this.handleEdit(index)} />
               </span>
             ) : null
         }
@@ -61,8 +59,9 @@ class Accomodation extends Component {
     this.setState({ showForm: !this.state.showForm });
   };
 
-  handleSave = record => {
+  handleSave = () => {
     const { form } = this.formRef.props;
+    const { formTitle, record } = this.state;
     form.validateFields((err, values) => {
       if (err) {
         return;
@@ -78,23 +77,28 @@ class Accomodation extends Component {
         delete values.website;
       }
 
-      // if (formTitle === 'create') {
-      this.props.createAccomodation(values);
-      // } else {
-      //   this.props.onUpdate({
-      //     id: value._id,
-      //     data: {
-      //       name: values.name
-      //     }
-      //   });
-      // }
+      if (formTitle === 'create') {
+        this.props.createAccomodation(values);
+      } else {
+        this.props.updateAccomodation({
+          id: record._id,
+          data: values
+        });
+      }
 
-      // form.resetFields();
-      // this.setState({ showForm: false });
+      form.resetFields();
+      this.setState({ showForm: false });
     });
   };
 
-  handleUpdate = record => this.props.updateAccomodation(record);
+  handleEdit = index => {
+    const getRecord = this.props.accomodation.listings[index];
+    this.setState({
+      record: getRecord,
+      formTitle: 'update',
+      showForm: true
+    });
+  };
 
   handleDelete = record => this.props.deleteAccomodation(record);
 
@@ -110,10 +114,12 @@ class Accomodation extends Component {
             <Col className="mb-16">
               <AccomodationForm
                 {...this.props}
+                formTitle={this.state.formTitle}
                 wrappedComponentRef={this.saveFormRef}
                 formType={this.state.formType}
                 onCancel={this.toggleForm}
                 onSave={this.handleSave}
+                record={this.state.record}
               />
             </Col>
           </Row>

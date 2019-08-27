@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'antd';
-
+import location from 'countrycitystatejson';
 const { Option } = Select;
 
 class AccomodationForm extends Component {
   state = {
     types: this.props.types
   };
+
+  componentDidMount() {
+    // const countries = location
+    //   .getCountries()
+    //   .map(({ shortName, name, capital }) => ({ shortName, name, capital }))
+    //   .sort();
+    // const cities = location.getCountryByShort('PH');
+    // console.log(countries);
+    // console.log(cities);
+  }
 
   onSelectType = value => {
     console.log(`selected ${value}`);
@@ -18,8 +28,10 @@ class AccomodationForm extends Component {
   };
 
   render() {
-    const { form, onCancel, onSave } = this.props;
+    const { types } = this.state;
+    const { form, onCancel, record } = this.props;
     const { getFieldDecorator } = form;
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -43,8 +55,6 @@ class AccomodationForm extends Component {
       }
     };
 
-    const { types } = this.state;
-
     const prefixSelector = getFieldDecorator('prefix', {
       initialValue: '63'
     })(
@@ -52,6 +62,7 @@ class AccomodationForm extends Component {
         <Option value="63">+63</Option>
       </Select>
     );
+
     return (
       <>
         <h1>Accomodation Setup</h1>
@@ -63,7 +74,8 @@ class AccomodationForm extends Component {
                   required: true,
                   message: 'Please input a name'
                 }
-              ]
+              ],
+              initialValue: record.name
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Address">
@@ -73,14 +85,16 @@ class AccomodationForm extends Component {
                   required: true,
                   message: 'Please input a address'
                 }
-              ]
+              ],
+              initialValue: record.address
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Country">
             {getFieldDecorator('country', {
               rules: [
                 { required: true, message: 'Please select your country!' }
-              ]
+              ],
+              initialValue: record.country
             })(
               <Select placeholder="Please select a country">
                 <Option value="ph">Philippines</Option>
@@ -94,7 +108,8 @@ class AccomodationForm extends Component {
                   required: true,
                   message: 'Please select your destination!'
                 }
-              ]
+              ],
+              initialValue: record.destination
             })(
               <Select placeholder="Please select a destination">
                 <Option value="mnl">Manila</Option>
@@ -108,7 +123,8 @@ class AccomodationForm extends Component {
                   required: true,
                   message: 'Please input a name'
                 }
-              ]
+              ],
+              initialValue: record.contactPerson
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Business Email Address">
@@ -118,7 +134,8 @@ class AccomodationForm extends Component {
                   required: true,
                   message: 'Please input a email address'
                 }
-              ]
+              ],
+              initialValue: record.businessEmail
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Main Phone Number">
@@ -128,26 +145,24 @@ class AccomodationForm extends Component {
                   required: true,
                   message: 'Please input your phone number!'
                 }
-              ]
+              ],
+              initialValue: record.mainPhoneNumber
             })(
               <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
             )}
           </Form.Item>
           <Form.Item label="Secondary Phone Number">
             {getFieldDecorator('secondaryPhoneNumber', {
-              rules: []
+              rules: [],
+              initialValue: record.secondaryPhoneNumber
             })(
               <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
             )}
           </Form.Item>
-          <Form.Item label="Website">
-            {getFieldDecorator('website', {
-              rules: []
-            })(<Input />)}
-          </Form.Item>
           <Form.Item label="Accomodation Type">
             {getFieldDecorator('accomodationTypeId', {
-              rules: [{ required: true, message: 'Please select a type!' }]
+              rules: [{ required: true, message: 'Please select a type!' }],
+              initialValue: record.type
             })(
               <Select
                 showSearch
@@ -170,7 +185,7 @@ class AccomodationForm extends Component {
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
-              Save
+              {record.formTitle ? 'Save' : 'Update'}
             </Button>
             <Button style={{ marginLeft: '8px' }} onClick={onCancel}>
               Cancel

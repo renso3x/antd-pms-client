@@ -19,8 +19,3 @@ export const updateAccomodation = data => ({
   type: types.UPDATE_ACCOMODATION_INIT,
   payload: { data }
 });
-
-export const deleteAccomodation = data => ({
-  type: types.DELETE_ACCOMODATION_INIT,
-  payload: { data }
-});

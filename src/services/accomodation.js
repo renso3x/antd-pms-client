@@ -12,6 +12,7 @@ export function postAccomodationAPI(data) {
 }
 
 export function updateAccomodationAPI(record) {
+  console.log(record);
   return httpRequest.put(
     `${process.env.REACT_APP_API_URL}/api/accomodations/${record.id}`,
     record.data

@@ -7,8 +7,7 @@ export function* watchAccomodation() {
   yield all([
     yield fork(fetchAccomodations),
     yield takeEvery(types.CREATE_ACCOMODATION_INIT, createAccomodation),
-    yield takeEvery(types.UPDATE_ACCOMODATION_INIT, updateAccomodation),
-    yield takeEvery(types.DELETE_ACCOMODATION_INIT, removeAccomodation)
+    yield takeEvery(types.UPDATE_ACCOMODATION_INIT, updateAccomodation)
   ]);
 }
 
@@ -27,7 +26,7 @@ function* createAccomodation(action) {
     // insert the new record
     yield put({
       type: types.CREATE_ACCOMODATION_SUCCESS,
-      payload: { data: result.data.type }
+      payload: { data: result.data.accomodation }
     });
   } catch (e) {
     action.fetchAccomodationError(e);
@@ -37,24 +36,12 @@ function* createAccomodation(action) {
 function* updateAccomodation(action) {
   try {
     const result = yield call(
-      action.updateAccomodationAPI,
+      service.updateAccomodationAPI,
       action.payload.data
     );
     yield put({
       type: types.UPDATE_ACCOMODATION_SUCCESS,
-      payload: { data: result.data.type }
-    });
-  } catch (e) {
-    action.fetchAccomodationError(e);
-  }
-}
-
-function* removeAccomodation(action) {
-  try {
-    yield call(service.deleteAccomodation, action.payload.data);
-    yield put({
-      type: types.DELETE_ACCOMODATION_SUCCESS,
-      payload: { id: action.payload.data._id }
+      payload: { data: result.data.accomodation }
     });
   } catch (e) {
     action.fetchAccomodationError(e);
