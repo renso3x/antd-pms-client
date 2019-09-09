@@ -5,9 +5,42 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.login__form {
+  max-width: 320px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin: -160px 0 0 -160px;
+  width: 320px;
+  height: 250px;
+  padding: 36px;
+  box-shadow: 0 0 100px rgba(0,0,0,.08);
+}
+
+.login__inner_form {
+  /* text-align: center; */
+  cursor: pointer;
+  margin-bottom: 24px;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
+.form-item {
+  box-sizing: border-box;
+  padding: 0;
+  color: #666;
+  font-size: 13px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  margin: 0 0 24px;
+  vertical-align: top;
 }
