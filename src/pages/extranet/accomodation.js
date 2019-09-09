@@ -111,7 +111,7 @@ class Accomodation extends Component {
       <MainLayout>
         {this.state.showForm ? (
           <Row>
-            <Col className="mb-16">
+            <Col>
               <AccomodationForm
                 {...this.props}
                 formTitle={this.state.formTitle}
