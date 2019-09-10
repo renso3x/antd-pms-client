@@ -8,5 +8,10 @@ export default {
     isFetching: false,
     types: [],
     error: {}
+  },
+  bedConfig: {
+    isFetching: false,
+    list: [],
+    error: {}
   }
 };

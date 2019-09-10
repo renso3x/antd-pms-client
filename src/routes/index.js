@@ -2,7 +2,8 @@ import {
   Login,
   Dashboard,
   ExtranetProperty,
-  ExtranetAccomodation
+  ExtranetAccomodation,
+  ExtraNetBedConfiguration
 } from '../pages';
 
 const routes = [
@@ -27,6 +28,13 @@ const routes = [
   {
     path: '/extranet/accomodation',
     component: ExtranetAccomodation,
+    exact: true,
+    protected: true,
+    isAdmin: true
+  },
+  {
+    path: '/extranet/bed-configuration',
+    component: ExtraNetBedConfiguration,
     exact: true,
     protected: true,
     isAdmin: true

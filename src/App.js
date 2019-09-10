@@ -6,15 +6,16 @@ import { Provider } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 
+import ProtectedRoute from './components/common/protectedRoute';
+import BedContextProvider from './context/bedConfig';
+
 import store from './config/configStore';
 import routes from './routes';
-
-import ProtectedRoute from './components/common/protectedRoute';
 
 function App() {
   return (
     <Provider store={store}>
-      <div>
+      <BedContextProvider>
         <ToastContainer />
         <Switch>
           {routes.map(route => {
@@ -23,7 +24,7 @@ function App() {
           })}
           <Route component={() => <h6>Not found</h6>} />
         </Switch>
-      </div>
+      </BedContextProvider>
     </Provider>
   );
 }

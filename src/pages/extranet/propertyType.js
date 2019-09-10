@@ -30,6 +30,7 @@ class PropertyTypePage extends Component {
   render() {
     return (
       <MainLayout>
+        <h1>Property Type Management</h1>
         <PropertyTypes
           types={this.state.types}
           onSave={this.handleSave}
