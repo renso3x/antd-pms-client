@@ -13,5 +13,10 @@ export default {
     isFetching: false,
     list: [],
     error: {}
+  },
+  amenities: {
+    isFetching: false,
+    list: [],
+    error: {}
   }
 };

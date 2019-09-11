@@ -47,8 +47,10 @@ const Navigation = () => {
               </Link>
             </Menu.Item>
             <Menu.Item key="amenities">
-              <Icon type="thunderbolt" />
-              <span>Room Amenities</span>
+              <Link to="/extranet/room-amenities">
+                <Icon type="thunderbolt" />
+                <span>Room Amenities</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="bed">
               <Link to="/extranet/bed-configuration">

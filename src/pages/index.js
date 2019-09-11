@@ -7,3 +7,4 @@ export { default as ExtranetAccomodation } from './extranet/accomodation';
 export {
   default as ExtraNetBedConfiguration
 } from './extranet/bedConfiguration';
+export { default as ExtraNetRoomAmenities } from './extranet/roomAmenities';
