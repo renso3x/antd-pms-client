@@ -8,7 +8,7 @@ import { BedConfigContext } from '../../context/bedConfig';
 
 const BedConfiguration = () => {
   const {
-    name,
+    form,
     showBedForm,
     toggleForm,
     handleSave,
@@ -28,9 +28,10 @@ const BedConfiguration = () => {
       </Row>
       <BedConfigurationList />
       <BedForm
-        value={name}
+        value={form}
         visible={showBedForm}
         onSubmit={handleSave}
+        onUpdate={handleUpdate}
         onCancel={toggleForm}
       />
     </MainLayout>

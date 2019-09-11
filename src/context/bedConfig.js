@@ -9,14 +9,30 @@ import {
 export const BedConfigContext = createContext();
 
 const BedConfigProvider = props => {
-  const [name, setName] = useState('');
+  const [form, setValues] = useState({ name: '' });
   const [showBedForm, setForm] = useState(false);
 
   const bedConfig = useSelector(state => state.bedConfig);
 
-  const handleSave = record => props.createBedConfig(record);
+  const resetForm = () => {
+    setValues({ name: '' });
+    setForm(false);
+  };
 
-  const handleUpdate = record => props.updateBedConfig(record);
+  const handleSave = record => {
+    props.createBedConfig(record);
+    resetForm();
+  };
+
+  const handleEdit = record => {
+    setValues({ ...record });
+    setForm(true);
+  };
+
+  const handleUpdate = record => {
+    props.updateBedConfig(record);
+    resetForm();
+  };
 
   const handleDelete = record => props.deleteBedConfig(record);
 
@@ -25,14 +41,15 @@ const BedConfigProvider = props => {
   return (
     <BedConfigContext.Provider
       value={{
-        name,
-        setName,
+        form,
+        setValues,
         showBedForm,
         bedConfig,
         handleSave,
         handleUpdate,
         handleDelete,
-        toggleForm
+        toggleForm,
+        handleEdit
       }}
     >
       {props.children}

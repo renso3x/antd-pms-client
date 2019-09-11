@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Modal } from 'antd';
 
-import { upperCaseFirstChar } from '../../utils/helper';
-
 const BedForm = props => {
-  const { title, form, visible, onSubmit, onCancel, value } = props;
+  const { form, visible, onSubmit, onCancel, value, onUpdate } = props;
   const { getFieldDecorator } = form;
   const formItemLayout = {
     labelCol: {
@@ -21,15 +19,27 @@ const BedForm = props => {
   const handleSubmit = () => {
     form.validateFields((err, values) => {
       if (!err) {
-        onSubmit({ name: values.name });
+        if (value._id) {
+          onUpdate({
+            id: value._id,
+            data: {
+              name: values.name
+            }
+          });
+        } else {
+          onSubmit({ name: values.name });
+        }
+        form.resetFields();
       }
     });
   };
 
+  const formTitle = !value._id ? 'Create' : 'Update';
+
   return (
     <Modal
       visible={visible}
-      title={`${upperCaseFirstChar(title)} Form`}
+      title={`${formTitle} Form`}
       onOk={handleSubmit}
       onCancel={onCancel}
     >
@@ -48,10 +58,6 @@ const BedForm = props => {
       </Form>
     </Modal>
   );
-};
-
-BedForm.defaultProps = {
-  title: 'Create'
 };
 
 BedForm.propTypes = {
