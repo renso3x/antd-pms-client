@@ -4,7 +4,8 @@ import {
   ExtranetProperty,
   ExtranetAccomodation,
   ExtraNetBedConfiguration,
-  ExtraNetRoomAmenities
+  ExtraNetRoomAmenities,
+  ExtraNetUsers
 } from '../pages';
 
 const routes = [
@@ -43,6 +44,13 @@ const routes = [
   {
     path: '/extranet/room-amenities',
     component: ExtraNetRoomAmenities,
+    exact: true,
+    protected: true,
+    isAdmin: true
+  },
+  {
+    path: '/extranet/user-management',
+    component: ExtraNetUsers,
     exact: true,
     protected: true,
     isAdmin: true

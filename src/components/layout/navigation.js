@@ -66,12 +66,10 @@ const Navigation = () => {
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="accounts">
-            <Icon type="team" />
-            <span>Users</span>
-          </Menu.Item>
-          <Menu.Item key="team">
-            <Icon type="team" />
-            <span>Roles</span>
+            <NavLink to="/extranet/user-management">
+              <Icon type="team" />
+              <span>Users</span>
+            </NavLink>
           </Menu.Item>
         </Menu>
       </div>

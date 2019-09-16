@@ -8,3 +8,4 @@ export {
   default as ExtraNetBedConfiguration
 } from './extranet/bedConfiguration';
 export { default as ExtraNetRoomAmenities } from './extranet/roomAmenities';
+export { default as ExtraNetUsers } from './extranet/users';
