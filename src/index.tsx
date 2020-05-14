@@ -9,9 +9,7 @@ import { store } from './config/store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <RootRouter />
-    </React.StrictMode>
+    <RootRouter />
   </Provider>,
   document.getElementById('root')
 );

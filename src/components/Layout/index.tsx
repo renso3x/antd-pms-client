@@ -1,5 +1,1 @@
-import React from 'react';
-
-export const Layout = () => {
-  return (<div />);
-};
+export * from './Main';
