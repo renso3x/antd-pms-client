@@ -1,10 +1,10 @@
 import React from 'react';
 import { Main } from '../components/Layout';
 
-export const Setup = () => {
+export const HotelSetup = () => {
   return (
     <Main>
-      <div>Setup Page</div>
+      <div>Hotel Setup Page</div>
     </Main>
   )
 }

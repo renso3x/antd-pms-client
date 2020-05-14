@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
@@ -6,14 +7,17 @@ import {
   DashboardOutlined,
   SettingFilled,
 } from '@ant-design/icons';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 const { Header, Sider, Content } = Layout;
 
 interface Props {
   children: React.ReactNode;
+  history?: any;
+  location?: any;
 }
 
-export class Main extends React.Component<Props> {
+class _Main extends React.Component<Props> {
   state = {
     collapsed: false,
   };
@@ -24,7 +28,10 @@ export class Main extends React.Component<Props> {
     });
   };
 
+  handleRoute = (to: string) => this.props.history.push(to);
+
   render() {
+    console.log(this.props.location)
     return (
       <Layout>
         <Sider
@@ -39,12 +46,17 @@ export class Main extends React.Component<Props> {
           }}
         >
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<DashboardOutlined />}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={['/']}
+            selectedKeys={[this.props.location.pathname]}
+          >
+            <Menu.Item key="/" icon={<DashboardOutlined />} onClick={() => this.handleRoute('/')}>
               Dashboard
             </Menu.Item>
-            <Menu.Item key="2" icon={<SettingFilled />}>
-              Setup
+            <Menu.Item key="/hotel-setup" icon={<SettingFilled />} onClick={() => this.handleRoute('/hotel-setup')}>
+              Hotel Setup
             </Menu.Item>
           </Menu>
         </Sider>
@@ -69,3 +81,5 @@ export class Main extends React.Component<Props> {
     );
   }
 }
+
+export const Main = withRouter(connect<{}, {}, Props & RouteComponentProps>(null)(_Main));
