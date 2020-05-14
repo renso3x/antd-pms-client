@@ -27,7 +27,17 @@ export class Main extends React.Component<Props> {
   render() {
     return (
       <Layout>
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={this.state.collapsed}
+          style={{
+            flex: '0 0 256px',
+            maxWidth: '256px',
+            minWidth: '256px',
+            width: '256px'
+          }}
+        >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<DashboardOutlined />}>
@@ -46,7 +56,6 @@ export class Main extends React.Component<Props> {
             })}
           </Header>
           <Content
-            className="site-layout-background"
             style={{
               margin: '24px 16px',
               padding: 24,
