@@ -1,26 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useFormik } from 'formik';
+import { Redirect } from 'react-router-dom';
 import { Form, Input, Button, Layout, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { makeLogin, ILogin } from '../../actions/auth';
+import { checkAuth } from '../../components/PrivateRoute';
 
 import StyledLogin from './styles';
 
 const { Content } = Layout;
 const { Title, Paragraph } = Typography;
 
-export const Login: React.FC = () => {
+interface Props {
+  makeLogin: (auth: ILogin) => void;
+}
+
+const _Login: React.FC<Props> = ({
+  makeLogin
+}) => {
   const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      makeLogin(values);
     },
   });
 
   const handleSumit = (): void => {
     formik.handleSubmit();
+  }
+
+  if (checkAuth()) {
+    return <Redirect to='/' />;
   }
 
   return (
@@ -52,3 +66,7 @@ export const Login: React.FC = () => {
     </Layout>
   );
 }
+
+export const Login = connect(null, {
+  makeLogin
+})(_Login);

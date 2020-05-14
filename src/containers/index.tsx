@@ -7,12 +7,14 @@ import {
 
 import { Login } from './Login';
 import { Dashboard } from './Dashboard';
+import { PrivateRoute } from '../components/PrivateRoute';
 
 export const RootRouter: React.FC = (): JSX.Element => (
   <Router>
     <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/" exact component={Dashboard} />
+
+      <PrivateRoute path="/" exact component={Dashboard} />
     </Switch>
   </Router>
 );
