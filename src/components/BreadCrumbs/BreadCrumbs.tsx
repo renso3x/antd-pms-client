@@ -16,7 +16,7 @@ export const BreadCrumbs:React.FC<Props> = ({
       <Row>
         <Col span={12}>
           <Breadcrumb>
-            <Breadcrumb.Item >
+            <Breadcrumb.Item>
               {Icon}
               <span>{text}</span>
             </Breadcrumb.Item>

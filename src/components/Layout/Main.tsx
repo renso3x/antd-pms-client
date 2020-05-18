@@ -31,7 +31,6 @@ class _Main extends React.Component<Props> {
   handleRoute = (to: string) => this.props.history.push(to);
 
   render() {
-    console.log(this.props.location)
     return (
       <Layout>
         <Sider
