@@ -4,13 +4,13 @@ import moment from 'moment';
 import { Card } from 'antd';
 import {
   CloseCircleTwoTone,
-  CheckCircleTwoTone
+  CheckCircleTwoTone,
 } from '@ant-design/icons';
 
 import { TableStyle } from './styles';
 
 export interface Props {
-  startDate?: Date
+  startDate?: Date;
 }
 
 export const Reservation: React.SFC<Props> = () => {
@@ -22,7 +22,9 @@ export const Reservation: React.SFC<Props> = () => {
         <table className="table table-striped table-bordered table-sm rsvp-horizontal">
           <thead>
             <tr>
-              <th scope="col" className="th-col">Room Types</th>
+              <th scope="col" className="th-col">
+                Room Types
+              </th>
               {TABLE_COLUMNS.map(w => {
                 return (<th scope="col" className="th-col">{moment(w, "DD-MM-YYYY").format('dd D')}</th>)
               })}
