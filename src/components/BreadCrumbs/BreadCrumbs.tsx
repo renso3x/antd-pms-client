@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Row, Col, Breadcrumb } from 'antd';
+import { Breadcrumb } from 'antd';
 import { StyledDiv } from './styles';
 
 interface Props {
@@ -13,16 +13,12 @@ export const BreadCrumbs:React.FC<Props> = ({
 }) => {
   return (
     <StyledDiv>
-      <Row>
-        <Col span={12}>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              {Icon}
-              <span>{text}</span>
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        </Col>
-      </Row>
+      <Breadcrumb>
+        <Breadcrumb.Item>
+          {Icon}
+          <span>{text}</span>
+        </Breadcrumb.Item>
+      </Breadcrumb>
     </StyledDiv>
   )
 }
