@@ -7,6 +7,11 @@ export const getAuthToken = () => {
   return localStorage.getItem('token');
 }
 
+export const getAssocation = async () => {
+  const obj = await localStorage.getItem('association');
+  if (obj) return JSON.parse(obj);
+}
+
 export const removeToken = () => {
   return localStorage.clear();
 }
@@ -33,6 +38,7 @@ export const makeLogin = (auth: ILogin, cb: () => void) => {
       const response = await axios.post(`${API_URL}/authenticate`, auth);
 
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('association', JSON.stringify(response.data.hotel));
 
       dispatch<LoginMakeAuthAction>({
         type: LoginActionTypes.makeLogin,

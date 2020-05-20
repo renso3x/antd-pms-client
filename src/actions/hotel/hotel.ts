@@ -5,14 +5,16 @@ import {
   FetchRoomTypes
 } from './types';
 import { API_URL } from '../../config/constant';
-import { getAuthToken } from '../auth';
+import { getAuthToken, getAssocation } from '../auth';
 /**
  * Room Types Services
  */
-export const getAllRoomTypes = (hotelId: number) => {
+export const getAllRoomTypes = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await axios.get(`${API_URL}/hotels/${hotelId}/room-types`, {
+      const hotel = await getAssocation();
+
+      const response = await axios.get(`${API_URL}/hotels/${hotel[0].id}/room-types`, {
         headers: {
           Authorization: getAuthToken()
         }

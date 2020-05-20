@@ -9,11 +9,11 @@ import { DateRanges } from '../components/Dates';
 import { Reservation, Filter } from '../components/Calendar';
 import { RoomTypeModalForm, RoomType } from '../components/Modals';
 
-import { getAllRoomTypes, RoomType as IRoomType } from '../actions/hotel';
+import { getAllRoomTypes } from '../actions/hotel';
 import { IRootState } from '../reducers';
 
 interface Props {
-  getAllRoomTypes: (hotelId: number) => void;
+  getAllRoomTypes: () => void;
 }
 
 const _HotelSetup: React.FC<Props> = ({
@@ -24,7 +24,7 @@ const _HotelSetup: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    getAllRoomTypes(1);
+    getAllRoomTypes();
   }, [])
 
   const handleShowForm = () => {
@@ -66,7 +66,7 @@ const _HotelSetup: React.FC<Props> = ({
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    roomTypes: state.roomTypes
+    roomTypes: state.roomTypes,
   }
 };
 
