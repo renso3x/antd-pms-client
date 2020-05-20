@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 
@@ -8,19 +9,29 @@ import { DateRanges } from '../components/Dates';
 import { Reservation, Filter } from '../components/Calendar';
 import { RoomTypeModalForm, RoomType } from '../components/Modals';
 
+import { getAllRoomTypes, RoomType as IRoomType } from '../actions/hotel';
+import { IRootState } from '../reducers';
 
-export const HotelSetup = () => {
+interface Props {
+  getAllRoomTypes: (hotelId: number) => void;
+}
+
+const _HotelSetup: React.FC<Props> = ({
+  getAllRoomTypes,
+}) => {
   const [state, setState] = useState({
     showRoomTypeModal: false
   });
 
+  useEffect(() => {
+    getAllRoomTypes(1);
+  }, [])
 
   const handleShowForm = () => {
     setState({
       ...state,
       showRoomTypeModal: true
     })
-    console.log('create room type modal');
   }
 
   const handleCreateRoomType = (values: RoomType) => {
@@ -28,10 +39,7 @@ export const HotelSetup = () => {
   }
 
   const handleCloseModal = (modal: string) => {
-    setState({
-      ...state,
-      [modal]: false
-    })
+    setState({ ...state, [modal]: false })
   }
 
   return (
@@ -55,3 +63,13 @@ export const HotelSetup = () => {
     </Main>
   )
 }
+
+const mapStateToProps = (state: IRootState) => {
+  return {
+    roomTypes: state.roomTypes
+  }
+};
+
+export const HotelSetup = connect(mapStateToProps, {
+  getAllRoomTypes
+})(_HotelSetup);

@@ -62,7 +62,7 @@ export const RoomTypeModalForm: React.SFC<RoomTypeModalFormProps> = ({
           <Form.Item label="Name">
             <Input
               name="name"
-              placeholder="Name"
+              placeholder=""
               onChange={formik.handleChange}
             />
             {errors.name && <Alert className="error" message={errors.name} type="error" />}
@@ -70,7 +70,7 @@ export const RoomTypeModalForm: React.SFC<RoomTypeModalFormProps> = ({
           <Form.Item label="Description">
             <Input.TextArea
               name="description"
-              placeholder="Type description...."
+              placeholder=""
               onChange={formik.handleChange}
             />
           </Form.Item>

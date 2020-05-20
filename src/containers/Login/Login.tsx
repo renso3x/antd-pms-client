@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useFormik } from 'formik';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Layout, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { makeLogin, ILogin } from '../../actions/auth';
@@ -13,23 +13,27 @@ const { Content } = Layout;
 const { Title, Paragraph } = Typography;
 
 interface Props {
-  makeLogin: (auth: ILogin) => void;
+  makeLogin: (auth: ILogin, cb: () => void) => void;
 }
 
 const _Login: React.FC<Props> = ({
   makeLogin
 }) => {
-  const formik = useFormik({
+    const history = useHistory();
+    const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     onSubmit: values => {
-      makeLogin(values);
+      makeLogin(values, () => {
+        history.push('/');
+      });
     },
   });
 
   const handleSumit = (): void => {
+
     formik.handleSubmit();
   }
 

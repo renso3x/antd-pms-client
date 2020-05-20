@@ -6,10 +6,14 @@ import {
   MenuFoldOutlined,
   DashboardOutlined,
   SettingFilled,
+  UserOutlined
 } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { removeToken } from '../../actions/auth';
+import { NavStyles } from './style';
 
 const { Header, Sider, Content } = Layout;
+const { SubMenu } = Menu;
 
 interface Props {
   children: React.ReactNode;
@@ -29,6 +33,11 @@ class _Main extends React.Component<Props> {
   };
 
   handleRoute = (to: string) => this.props.history.push(to);
+
+  handleLogout = () => {
+    removeToken();
+    this.props.history.push('/login');
+  }
 
   render() {
     return (
@@ -61,10 +70,17 @@ class _Main extends React.Component<Props> {
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: this.toggle,
-            })}
+            <NavStyles>
+              <Menu mode="horizontal">
+                {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                  className: 'trigger',
+                  onClick: this.toggle,
+                })}
+                <SubMenu icon={<UserOutlined />} className="right-menu">
+                  <Menu.Item key="setting:3" onClick={this.handleLogout}>Logout</Menu.Item>
+                </SubMenu>
+              </Menu>
+            </NavStyles>
           </Header>
           <Content
             style={{

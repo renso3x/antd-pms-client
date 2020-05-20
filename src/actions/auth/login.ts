@@ -3,6 +3,13 @@ import { Dispatch } from 'redux';
 import { LoginActionTypes } from './types';
 import { API_URL } from '../../config/constant';
 
+export const getAuthToken = () => {
+  return localStorage.getItem('token');
+}
+
+export const removeToken = () => {
+  return localStorage.clear();
+}
 
 export interface ILogin {
   email: string;
@@ -12,12 +19,15 @@ export interface ILogin {
 // Generic dispatch function
 export interface LoginMakeAuthAction {
   type: LoginActionTypes.makeLogin;
-  payload: string
+  payload: {
+    token: string;
+    association: any;
+  }
 }
 
 export const getToken = localStorage.getItem('token');
 
-export const makeLogin = (auth: ILogin) => {
+export const makeLogin = (auth: ILogin, cb: () => void) => {
   return async (dispatch: Dispatch) => {
     try {
       const response = await axios.post(`${API_URL}/authenticate`, auth);
@@ -26,9 +36,12 @@ export const makeLogin = (auth: ILogin) => {
 
       dispatch<LoginMakeAuthAction>({
         type: LoginActionTypes.makeLogin,
-        payload: response.data.token
+        payload: {
+          token: response.data.token,
+          association: response.data.hotel
+        }
       });
-      window.location.href = '/';
+      cb();
     } catch (e) {
       console.error('Error: ', e);
     }
