@@ -7,11 +7,13 @@ import { FormStyles } from './style';
 export interface RoomType {
   name: string;
   description?: string;
+  rate: number;
 }
 
 const FormSchema = Yup.object({
   name: Yup.string().required(),
-  description: Yup.string()
+  description: Yup.string(),
+  rate: Yup.number().required()
 });
 
 export interface RoomTypeModalFormProps {
@@ -29,6 +31,7 @@ export const RoomTypeModalForm: React.SFC<RoomTypeModalFormProps> = ({
     initialValues: {
       name: '',
       description: '',
+      rate: 0,
     },
     validationSchema: FormSchema,
     onSubmit: (values: RoomType) => {
@@ -73,6 +76,14 @@ export const RoomTypeModalForm: React.SFC<RoomTypeModalFormProps> = ({
               placeholder=""
               onChange={formik.handleChange}
             />
+          </Form.Item>
+          <Form.Item label="Rate">
+            <Input
+              name="rate"
+              placeholder=""
+              onChange={formik.handleChange}
+            />
+            {errors.rate && <Alert className="error" message={errors.rate} type="error" />}
           </Form.Item>
         </Form>
       </FormStyles>

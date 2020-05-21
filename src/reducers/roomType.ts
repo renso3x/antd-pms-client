@@ -1,8 +1,7 @@
-
-import { RoomTypeActions, RoomType, HotelActionTypes } from '../actions/hotel';
+import { RoomTypeActions, IRoomType, HotelActionTypes } from '../actions/hotel';
 
 export interface RoomTypeState {
-  types: RoomType[];
+  types: IRoomType[];
 }
 
 const initialState = {
@@ -20,5 +19,4 @@ export const roomTypeReducer = (state:RoomTypeState = initialState, action: Room
     default:
       return state;
   }
-
 }

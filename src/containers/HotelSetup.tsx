@@ -7,17 +7,23 @@ import { Main } from '../components/Layout';
 import { BreadCrumbs } from '../components/BreadCrumbs';
 import { DateRanges } from '../components/Dates';
 import { Reservation, Filter } from '../components/Calendar';
-import { RoomTypeModalForm, RoomType } from '../components/Modals';
+import { RoomTypeModalForm } from '../components/Modals';
 
-import { getAllRoomTypes } from '../actions/hotel';
+import { getAllRoomTypes, createRoomTypes, IRoomType } from '../actions/hotel';
 import { IRootState } from '../reducers';
 
 interface Props {
+  roomTypes: {
+    types: IRoomType[]
+  }
   getAllRoomTypes: () => void;
+  createRoomTypes: Function;
 }
 
 const _HotelSetup: React.FC<Props> = ({
+  roomTypes: { types },
   getAllRoomTypes,
+  createRoomTypes,
 }) => {
   const [state, setState] = useState({
     showRoomTypeModal: false
@@ -25,7 +31,7 @@ const _HotelSetup: React.FC<Props> = ({
 
   useEffect(() => {
     getAllRoomTypes();
-  }, [])
+  }, [getAllRoomTypes]);
 
   const handleShowForm = () => {
     setState({
@@ -34,8 +40,8 @@ const _HotelSetup: React.FC<Props> = ({
     })
   }
 
-  const handleCreateRoomType = (values: RoomType) => {
-    console.log('create a room type', values)
+  const handleCreateRoomType = (values: any) => {
+    createRoomTypes(values);
   }
 
   const handleCloseModal = (modal: string) => {
@@ -52,7 +58,9 @@ const _HotelSetup: React.FC<Props> = ({
         </Col>
         <Col>
           <Filter />
-          <Reservation />
+          <Reservation
+            roomTypes={types}
+          />
         </Col>
       </Row>
       <RoomTypeModalForm
@@ -64,12 +72,13 @@ const _HotelSetup: React.FC<Props> = ({
   )
 }
 
-const mapStateToProps = (state: IRootState) => {
+const mapStateToProps = ({ roomTypes }: IRootState) => {
   return {
-    roomTypes: state.roomTypes,
+    roomTypes,
   }
 };
 
 export const HotelSetup = connect(mapStateToProps, {
-  getAllRoomTypes
+  getAllRoomTypes,
+  createRoomTypes
 })(_HotelSetup);
