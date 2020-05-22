@@ -6,19 +6,20 @@ import {
   CloseCircleTwoTone,
   CheckCircleTwoTone,
   PlusOutlined,
-  SearchOutlined
 } from '@ant-design/icons';
-import { IRoomType } from '../../actions/hotel';
+import { IRoomType, RatePlan } from '../../actions/hotel';
 
 import { TableStyle } from './styles';
 
 export interface Props {
   startDate?: Date;
   roomTypes: IRoomType[];
+  showModalRatePlan: (roomType: IRoomType | null, modal: 'showRoomTypeModal' | 'showRatePlanModal') => void;
 }
 
 export const Reservation: React.SFC<Props> = ({
-  roomTypes
+  roomTypes,
+  showModalRatePlan
 }) => {
   const TABLE_COLUMNS = _.times(30, (n: number) =>  moment().add(n, 'days'))
 
@@ -36,21 +37,34 @@ export const Reservation: React.SFC<Props> = ({
               })}
             </tr>
             {roomTypes.length && roomTypes.map((type: IRoomType) => {
-              return (
-                <tr>
+              return [
+                <tr key={type.id}>
                   <td>
                     {type.name}
-                    <Button size="small" type="primary" shape="circle"  icon={<PlusOutlined />} />
+                    <Button
+                      size="small"
+                      type="primary"
+                      shape="circle"
+                      icon={<PlusOutlined />}
+                      onClick={() => type && showModalRatePlan(type, 'showRatePlanModal')}
+                    />
                   </td>
-                  { _.times(30, (n: number) => {
-                    let icon = <CloseCircleTwoTone twoToneColor="red" />;
-                    if (n % 2 === 0) {
-                      icon = <CheckCircleTwoTone twoToneColor="green" />;
-                    }
-                    return <td>{icon}</td>
-                  })}
-                </tr>
-              )
+                </tr>,
+                  type.rateplans && type.rateplans.map((rate: RatePlan) => (
+                  <tr key={rate.id}>
+                    <td>
+                      {rate.name}
+                    </td>
+                    { _.times(30, (n: number) => {
+                      let icon = <CloseCircleTwoTone twoToneColor="red" />;
+                      if (n % 2 === 0) {
+                        icon = <CheckCircleTwoTone twoToneColor="green" />;
+                      }
+                      return <td>{icon}</td>
+                    })}
+                  </tr>
+                ))
+              ]
             })}
           </thead>
         </table>

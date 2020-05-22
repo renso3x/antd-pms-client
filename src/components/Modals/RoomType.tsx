@@ -35,7 +35,8 @@ export const RoomTypeModalForm: React.SFC<RoomTypeModalFormProps> = ({
     },
     validationSchema: FormSchema,
     onSubmit: (values: RoomType) => {
-      handleSubmit(values);
+      const payload = { ...values, rate: +values.rate };
+      handleSubmit(payload);
     },
   });
 
